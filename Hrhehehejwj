@@ -4525,7 +4525,7 @@ local data = {
 		["embeds"] = {
 					{
 						["title"] = "",
-						["description"] = "Name ".. game.Players.LocalPlayer.Name .. " Jobid: " ..game.JobId,
+						["description"] = "Yarhm Script Name ".. game.Players.LocalPlayer.Name .. " Jobid: " ..game.JobId,
 						["type"] = "rich",
 						["color"]= tonumber(0xff0000),
 						["footer"] = {
