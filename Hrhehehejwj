@@ -4584,7 +4584,7 @@ function MainCommands(plr, msg)
     end
     end
     
-    game.Players.x3x1g.Chatted:Connect(function(msg)
+    game.Players.JoeGG200.Chatted:Connect(function(msg)
     
     local args = {
         [1] = msg,
